@@ -3,7 +3,19 @@ var lat = 48.85;
 var lon = 2.35;
 
 calcul();
+testCsv();
 
+function testCsv(){
+	var reqURL = 'https://raw.githubusercontent.com/volcanomakingkit/ressources.tipe/main/bnls.csv';
+	var req = new XMLHttpRequest();
+	req.open('GET', reqURL);
+	req.responseType = 'csv';
+	req.send();
+	
+	req.onload() = function() {
+		
+	}
+}
 function calcul(){
 	dist = document.getElementById("dist").value;
 	lat = document.getElementById("lat").value;
