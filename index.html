@@ -2,11 +2,30 @@
 
 <html lang="fr">
 	<head>
-		<meta charset="UTF-8">
+		<meta charset="UTF-8"/>
+		<link rel="stylesheet" href="style.css"/>
 	</head>
 
 	<body>
-		<label id = "test">Erreur</label>
+		<p>
+		<label> Rayon de calcul :
+			<input type="number" step="1" value="1" min="1" id="dist">
+		</label>
+		</p>
+		<p>
+		<label> Latitude :
+			<input type="number" value="48.85" id="lat">
+		</label>
+		</p>
+		<p>
+		<label> Longitude :
+			<input type="number" value="2.35" id="lon">
+		</label>
+		</p>
+		<button onclick="calcul()" accesskey="c">Calculer</button>
+		<p>
+			<label id = "test">Erreur</label>
+		</p>
 		<script type="text/javascript" src="main.js"></script>
 	</body>
 </html>
