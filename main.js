@@ -3,25 +3,14 @@ var lat = 48.85;
 var lon = 2.35;
 
 calcul();
-testCsv();
 
-function testCsv(){
-	var reqURL = 'https://raw.githubusercontent.com/volcanomakingkit/ressources.tipe/main/bnls.csv';
-	var req = new XMLHttpRequest();
-	req.open('GET', reqURL);
-	req.responseType = 'csv';
-	req.send();
-	
-	req.onload() = function() {
-		
-	}
-}
 function calcul(){
 	dist = document.getElementById("dist").value;
 	lat = document.getElementById("lat").value;
 	lon = document.getElementById("lon").value;
 	console.log("calcul");
 	var requestURL = 'https://api.cquest.org/dvf?lat='+lat+'&lon='+lon+'&dist='+dist;
+	console.log(requestURL);
 	var request = new XMLHttpRequest();
 	request.open('GET', requestURL);
 	request.responseType = 'json';
@@ -52,3 +41,12 @@ function calcul(){
 		}
 	}
 }
+
+var csv = `
+	"header1,header2,header3"
+	"aaa,bbb,ccc"
+	"zzz,yyy,xxx"
+`;
+
+var parsed = parse(csv);
+console.log(parsed);
