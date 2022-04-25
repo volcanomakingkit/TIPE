@@ -3,6 +3,45 @@ var lat = 48.85;
 var lon = 2.35;
 
 calcul();
+var tab = calculParkingInit();
+
+function calculParking(tab){
+	dist = document.getElementById("dist").value;
+	lat = document.getElementById("lat").value;
+	lon = document.getElementById("lon").value;
+	var len = tab.length;
+	var min = Infinity;
+	var tmp;
+	var indice = 0;
+	for(var i = 1; i < len; i++){
+		tmp = ((parseFloat(tab[i][18])-lon)**2 + (parseFloat(tab[i][19])-lat)**2)**0.5;
+		if (tmp < min){
+			min = tmp;
+			indice = i;
+		}
+	}
+	console.log("distance minimale parking : " + min);
+	document.getElementById("parking").innerHTML = "Prix du parking le plus proche : " + tab[indice][21] + " €";
+}
+
+function calculParkingInit(){
+	var request = new XMLHttpRequest();
+	request.open('GET', 'https://raw.githubusercontent.com/volcanomakingkit/ressources.tipe/main/bnls.csv');
+	request.send();
+	request.onload = function(){
+		var valeursInitiales = request.response;
+		valeursInitiales = valeursInitiales.split("\r\n");
+		var len = valeursInitiales.length;
+		console.log(valeursInitiales);
+		var tab = [];
+		for(var i = 0; i < len; i++){
+			tab.push(valeursInitiales[i].split(";"));
+		}
+		console.log(tab);
+		calculParking(tab);
+		return tab;
+	}
+}
 
 function calcul(){
 	dist = document.getElementById("dist").value;
@@ -41,12 +80,3 @@ function calcul(){
 		}
 	}
 }
-
-var csv = `
-	"header1,header2,header3"
-	"aaa,bbb,ccc"
-	"zzz,yyy,xxx"
-`;
-
-var parsed = parse(csv);
-console.log(parsed);
