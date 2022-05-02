@@ -14,14 +14,16 @@ function calculParking(tab){
 	var tmp;
 	var indice = 0;
 	for(var i = 1; i < len; i++){
-		tmp = ((parseFloat(tab[i][18])-lon)**2 + (parseFloat(tab[i][19])-lat)**2)**0.5;
+		tmp = (parseFloat(tab[i][18])-lon)**2 + (parseFloat(tab[i][19])-lat)**2;
 		if (tmp < min){
 			min = tmp;
 			indice = i;
 		}
 	}
-	console.log("distance minimale parking : " + min);
-	document.getElementById("parking").innerHTML = "Prix du parking le plus proche : " + tab[indice][21] + " €";
+	console.log("distance minimale parking : " + min**0.5);
+	document.getElementById("parking").innerHTML = "Prix du parking le plus proche : " + tab[indice][21] + " €<br>";
+	document.getElementById("parking").innerHTML += tab[indice][18] + '<br>'
+	document.getElementById("parking").innerHTML += tab[indice][19] + '<br>'
 }
 
 function calculParkingInit(){
@@ -64,12 +66,20 @@ function calcul(){
 		var len = data.features.length;
 		var dataText = ''
 		var n = 0;
+		var t = 0;
+		var surface;
 		for (var i = 0; i < len; i++){
-			n += data.features[i].properties.valeur_fonciere;
+			surface = data.features[i].properties.surface_relle_bati;
+			prix = data.features[i].properties.valeur_fonciere
+			if (!isNaN(surface) && !isNaN(prix)){
+				n += prix / surface;
+				t += 1
+			}
+			
 			// dataText += data.features[i].properties.valeur_fonciere + ' € <br>';
 		}
-		dataText += 'Moyenne : ' + n/len + ' €';
-		dataText += '<br/>Nombres de valeurs : ' + len;
+		dataText += 'Moyenne : ' + n/t + ' €/m²';
+		dataText += '<br/>Nombres de valeurs : ' + t;
 		document.getElementById("test").innerHTML = dataText;
 		obj = data;
 		n_test = n;
