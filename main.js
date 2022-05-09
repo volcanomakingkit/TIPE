@@ -51,7 +51,7 @@ function calcul(){
 	lon = document.getElementById("lon").value;
 	console.log("calcul");
 	var requestURL = 'https://api.cquest.org/dvf?lat='+lat+'&lon='+lon+'&dist='+dist;
-	console.log(requestURL);
+	// console.log(requestURL);
 	var request = new XMLHttpRequest();
 	request.open('GET', requestURL);
 	request.responseType = 'json';
