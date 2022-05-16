@@ -78,8 +78,9 @@ function calcul(){
 			
 			// dataText += data.features[i].properties.valeur_fonciere + ' € <br>';
 		}
-		dataText += 'Moyenne : ' + n/t + ' €/m²';
+		dataText += 'Moyenne : ' + Math.ceil(n/t) + ' €/m²';
 		dataText += '<br/>Nombres de valeurs : ' + t;
+		dataText += '<br/>Prix : ' + document.getElementById("surface").value * Math.ceil(n/t) + " €";
 		document.getElementById("test").innerHTML = dataText;
 		obj = data;
 		n_test = n;
